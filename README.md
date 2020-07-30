@@ -7,5 +7,7 @@
 
 ## Course material from the course ADVANCED NLP with spaCy 
 
-- Chapter 1 
-- Chapter 2 (Currently studying .)
+- [Chapter 1](https://htmlpreview.github.io/?https://github.com/pawarashish564/ADVANCED-NLP-with-spaCy/blob/master/Advanced%20NLP%20with%20spaCy%20-%20Chapter%201%20.html) 
+- Chapter 2 (Currently studying ... )
+
+
