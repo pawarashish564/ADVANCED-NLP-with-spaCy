@@ -6,6 +6,9 @@
 <!-- ![](https://i.imgur.com/5RXLtrr.jpg) -->
 
 ## Course material from the course ADVANCED NLP with spaCy 
+<!-- using htmlpreview -->
+<!-- link to render static html -->
+<!-- https://htmlpreview.github.io/ -->
 
 - [Chapter 1](https://htmlpreview.github.io/?https://github.com/pawarashish564/ADVANCED-NLP-with-spaCy/blob/master/Advanced%20NLP%20with%20spaCy%20-%20Chapter%201%20.html) 
 - Chapter 2 (Currently studying ... )
