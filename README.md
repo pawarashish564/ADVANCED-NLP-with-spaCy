@@ -5,7 +5,7 @@
 ![](https://i.imgur.com/JC00pHW.jpg)
 <!-- ![](https://i.imgur.com/5RXLtrr.jpg) -->
 
-## Course material from the course ADVANCED NLP with spaCy & Other NLP material from Kaggle
+> Course material from the course ADVANCED NLP with spaCy & Other NLP material from Kaggle
 <!-- using htmlpreview -->
 <!-- link to render static html -->
 <!-- https://htmlpreview.github.io/ -->
