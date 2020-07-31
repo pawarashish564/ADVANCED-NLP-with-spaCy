@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>Advanced NLP with spaCy - Chapter 1 </title>
+<title>Chapter-3</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13074,274 +13074,37 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Advanced-NLP-with-spaCy">Advanced NLP with spaCy<a class="anchor-link" href="#Advanced-NLP-with-spaCy">&#182;</a></h1><h2 id="Chapter-1">Chapter 1<a class="anchor-link" href="#Chapter-1">&#182;</a></h2><blockquote><p>Introduction to spaCy</p>
-</blockquote>
-
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># importing spaCy</span>
-<span class="c1"># also there are packages for other languages like German, Spanish</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Processing Pipelines</span>
 
-<span class="c1"># Import the German language class</span>
-<span class="c1"># from spacy.lang.de import German</span>
+<span class="c1"># Internal Workings of doc = nlp(&#39;hello strings&#39;)</span>
+<span class="c1"># Built in pipeline components</span>
 
-<span class="c1"># Import the Spanish language class</span>
-<span class="c1"># from spacy.lang.es import Spanish</span>
-
-<span class="c1"># Create the nlp object</span>
-<span class="kn">from</span> <span class="nn">spacy.lang.en</span> <span class="k">import</span> <span class="n">English</span>
-<span class="n">nlp</span> <span class="o">=</span> <span class="n">English</span><span class="p">()</span>
-<span class="n">nlp</span>
+<span class="c1"># token.tag, token.pos</span>
+<span class="c1"># token.dep, token.head, Doc.sents, Doc.noun_chunks</span>
+<span class="c1"># doc.ents, doc.ent_iob, doc.ent_type</span>
+<span class="c1"># doc.cats -&gt; text classifier</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[17]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&lt;spacy.lang.en.English at 0x7f7ebbfe4d10&gt;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># when we process any data from this nlp object spacy creates doc object (documentation) .</span>
-<span class="c1"># Doc object contains tokens </span>
-<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s2">&quot;hello world!&quot;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>hello
-world
-!
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># to get token at specific index you can use doc[1]</span>
-<span class="n">token1</span> <span class="o">=</span> <span class="n">doc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">token1</span><span class="o">.</span><span class="n">text</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[19]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;hello&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># span is just group of two or more tokens in doc </span>
-<span class="c1"># we can use list comprehensions to create span</span>
-<span class="n">span</span> <span class="o">=</span> <span class="n">doc</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
-<span class="n">span</span><span class="o">.</span><span class="n">text</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[20]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;world!&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## Lexical Attributes</span>
-<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s2">&quot;It cost $5 dollers&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;index : &quot;</span><span class="p">,[</span><span class="n">token</span><span class="o">.</span><span class="n">i</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;token text : &quot;</span><span class="p">,[</span><span class="n">token</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">])</span>
-
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;is_alpha : &quot;</span><span class="p">,[</span><span class="n">token</span><span class="o">.</span><span class="n">is_alpha</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;is_punctuation : &quot;</span><span class="p">,[</span><span class="n">token</span><span class="o">.</span><span class="n">is_punct</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;is_num : &quot;</span><span class="p">,[</span><span class="n">token</span><span class="o">.</span><span class="n">like_num</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">])</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>index :  [0, 1, 2, 3, 4]
-token text :  [&#39;It&#39;, &#39;cost&#39;, &#39;$&#39;, &#39;5&#39;, &#39;dollers&#39;]
-is_alpha :  [True, True, False, False, True]
-is_punctuation :  [False, False, False, False, False]
-is_num :  [False, False, False, True, False]
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Process the text</span>
-<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span>
-    <span class="s2">&quot;In 1990, more than 60</span><span class="si">% o</span><span class="s2">f people in East Asia were in extreme poverty. &quot;</span>
-    <span class="s2">&quot;Now less than 4</span><span class="si">% a</span><span class="s2">re.&quot;</span>
-<span class="p">)</span>
-
-<span class="c1"># Iterate over the tokens in the doc</span>
-<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">:</span>
-    <span class="c1"># Check if the token resembles a number</span>
-    <span class="k">if</span> <span class="n">token</span><span class="o">.</span><span class="n">like_num</span><span class="p">:</span>
-        <span class="c1"># Get the next token in the document</span>
-        <span class="n">next_token</span> <span class="o">=</span> <span class="n">doc</span><span class="p">[</span><span class="n">token</span><span class="o">.</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-        <span class="c1"># Check if the next token&#39;s text equals &quot;%&quot;</span>
-        <span class="k">if</span> <span class="n">next_token</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="s2">&quot;%&quot;</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Percentage found:&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Percentage found: 60
-Percentage found: 4
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># statistical models</span>
-<span class="c1"># it enables spacy to predict POS, named entities, syntanctic dependencies</span>
-
-<span class="c1"># en_core_web_sm -&gt; small package has all the capabilies based on web text</span>
-<span class="c1"># this pre-trained model package can be download using spacy download command</span>
-<span class="c1"># python -m spacy download en_core_web_sm </span>
-
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># from spacy.lang.en import English</span>
 <span class="kn">import</span> <span class="nn">spacy</span>
-<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en_core_web_sm&#39;</span><span class="p">)</span>
-<span class="c1"># this package contains binary weights for spacy to make predictions, vocabulary and meta information</span>
-<span class="c1"># (language and pipeline)</span>
-<span class="n">nlp</span>
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en_core_web_lg&#39;</span><span class="p">)</span>
+
+<span class="n">nlp</span><span class="o">.</span><span class="n">pipe_names</span>
 </pre></div>
 
     </div>
@@ -13354,13 +13117,13 @@ Percentage found: 4
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[23]:</div>
+    <div class="prompt output_prompt">Out[3]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;spacy.lang.en.English at 0x7f7eba3fad10&gt;</pre>
+<pre>[&#39;tagger&#39;, &#39;parser&#39;, &#39;ner&#39;]</pre>
 </div>
 
 </div>
@@ -13371,14 +13134,235 @@ Percentage found: 4
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s2">&quot;she ate the pizza.&quot;</span><span class="p">)</span>
-<span class="c1"># In spacy , attributes returns string ends with _</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">nlp</span><span class="o">.</span><span class="n">pipeline</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[4]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[(&#39;tagger&#39;, &lt;spacy.pipeline.pipes.Tagger at 0x7fb6095782d0&gt;),
+ (&#39;parser&#39;, &lt;spacy.pipeline.pipes.DependencyParser at 0x7fb6083ecad0&gt;),
+ (&#39;ner&#39;, &lt;spacy.pipeline.pipes.EntityRecognizer at 0x7fb6083eca60&gt;)]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#  Adding custom components</span>
+
+<span class="c1"># def custom_component:</span>
+    <span class="c1">#do something here     </span>
+<span class="c1">#     return doc</span>
+
+<span class="c1"># nlp.add_pipe(custom_component)</span>
+
+<span class="c1"># add_pipe optional parameters first=True, last=True(default) , before=&#39;ner&#39;,after = &#39;ner&#39;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
+
+<span class="c1"># Define the custom component</span>
+<span class="k">def</span> <span class="nf">length_component</span><span class="p">(</span><span class="n">doc</span><span class="p">):</span>
+    <span class="c1"># Get the doc&#39;s length</span>
+    <span class="n">doc_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;This document is </span><span class="si">{doc_length}</span><span class="s2"> tokens long.&quot;</span><span class="p">)</span>
+    <span class="c1"># Return the doc</span>
+    <span class="k">return</span> <span class="n">doc</span>
+
+
+<span class="c1"># Load the small English model</span>
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">)</span>
+
+<span class="c1"># Add the component first in the pipeline and print the pipe names</span>
+<span class="n">nlp</span><span class="o">.</span><span class="n">add_pipe</span><span class="p">(</span><span class="n">length_component</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nlp</span><span class="o">.</span><span class="n">pipe_names</span><span class="p">)</span>
+
+<span class="c1"># Process a text</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s2">&quot;This is a sentence.&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;length_component&#39;, &#39;tagger&#39;, &#39;parser&#39;, &#39;ner&#39;]
+This document is 5 tokens long.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
+<span class="kn">from</span> <span class="nn">spacy.matcher</span> <span class="k">import</span> <span class="n">PhraseMatcher</span>
+<span class="kn">from</span> <span class="nn">spacy.tokens</span> <span class="k">import</span> <span class="n">Span</span>
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">)</span>
+<span class="n">animals</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Golden Retriever&quot;</span><span class="p">,</span> <span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="s2">&quot;turtle&quot;</span><span class="p">,</span> <span class="s2">&quot;Rattus norvegicus&quot;</span><span class="p">]</span>
+<span class="n">animal_patterns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nlp</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">animals</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;animal_patterns:&quot;</span><span class="p">,</span> <span class="n">animal_patterns</span><span class="p">)</span>
+<span class="n">matcher</span> <span class="o">=</span> <span class="n">PhraseMatcher</span><span class="p">(</span><span class="n">nlp</span><span class="o">.</span><span class="n">vocab</span><span class="p">)</span>
+<span class="n">matcher</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;ANIMAL&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">animal_patterns</span><span class="p">)</span>
+
+<span class="c1"># Define the custom component</span>
+<span class="k">def</span> <span class="nf">animal_component</span><span class="p">(</span><span class="n">doc</span><span class="p">):</span>
+    <span class="c1"># Apply the matcher to the doc</span>
+    <span class="n">matches</span> <span class="o">=</span> <span class="n">matcher</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+    <span class="c1"># Create a Span for each match and assign the label &quot;ANIMAL&quot;</span>
+    <span class="n">spans</span> <span class="o">=</span> <span class="p">[</span><span class="n">Span</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;ANIMAL&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">match_id</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="ow">in</span> <span class="n">matches</span><span class="p">]</span>
+    <span class="c1"># Overwrite the doc.ents with the matched spans</span>
+    <span class="n">doc</span><span class="o">.</span><span class="n">ents</span> <span class="o">=</span> <span class="n">spans</span>
+    <span class="k">return</span> <span class="n">doc</span>
+
+<span class="c1"># Add the component to the pipeline after the &quot;ner&quot; component</span>
+<span class="n">nlp</span><span class="o">.</span><span class="n">add_pipe</span><span class="p">(</span><span class="n">animal_component</span><span class="p">,</span> <span class="n">after</span><span class="o">=</span><span class="s2">&quot;ner&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nlp</span><span class="o">.</span><span class="n">pipe_names</span><span class="p">)</span>
+
+<span class="c1"># Process the text and print the text and label for the doc.ents</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s2">&quot;I have a cat and a Golden Retriever&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">([(</span><span class="n">ent</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">ent</span><span class="o">.</span><span class="n">label_</span><span class="p">)</span> <span class="k">for</span> <span class="n">ent</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">ents</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>animal_patterns: [Golden Retriever, cat, turtle, Rattus norvegicus]
+[&#39;tagger&#39;, &#39;parser&#39;, &#39;ner&#39;, &#39;animal_component&#39;]
+[(&#39;cat&#39;, &#39;ANIMAL&#39;), (&#39;Golden Retriever&#39;, &#39;ANIMAL&#39;)]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Custom attributes and Property extensions</span>
+
+<span class="kn">from</span> <span class="nn">spacy.lang.en</span> <span class="k">import</span> <span class="n">English</span>
+<span class="kn">from</span> <span class="nn">spacy.tokens</span> <span class="k">import</span> <span class="n">Token</span>
+
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">English</span><span class="p">()</span>
+
+<span class="c1"># Register the Token extension attribute &quot;is_country&quot; with the default value False</span>
+<span class="n">Token</span><span class="o">.</span><span class="n">set_extension</span><span class="p">(</span><span class="s2">&quot;is_country&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Process the text and set the is_country attribute to True for the token &quot;Spain&quot;</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s2">&quot;I live in Spain.&quot;</span><span class="p">)</span>
+<span class="n">doc</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">is_country</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># Print the token text and the is_country attribute for all tokens</span>
+<span class="nb">print</span><span class="p">([(</span><span class="n">token</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">is_country</span><span class="p">)</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[(&#39;I&#39;, False), (&#39;live&#39;, False), (&#39;in&#39;, False), (&#39;Spain&#39;, True), (&#39;.&#39;, False)]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">spacy.lang.en</span> <span class="k">import</span> <span class="n">English</span>
+<span class="kn">from</span> <span class="nn">spacy.tokens</span> <span class="k">import</span> <span class="n">Token</span>
+
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">English</span><span class="p">()</span>
+<span class="c1"># Define the getter function that takes a token and returns its reversed text</span>
+<span class="k">def</span> <span class="nf">get_reversed</span><span class="p">(</span><span class="n">token</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">token</span><span class="o">.</span><span class="n">text</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="c1"># Register the Token property extension &quot;reversed&quot; with the getter get_reversed</span>
+<span class="n">Token</span><span class="o">.</span><span class="n">set_extension</span><span class="p">(</span><span class="s2">&quot;reversed&quot;</span><span class="p">,</span> <span class="n">getter</span><span class="o">=</span><span class="n">get_reversed</span><span class="p">)</span>
+
+<span class="c1"># Process the text and print the reversed attribute for each token</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s2">&quot;All generalizations are false, including this one.&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="p">,</span><span class="n">token</span><span class="o">.</span><span class="n">pos_</span><span class="p">)</span>
-<span class="c1"># attribute without the _ returns int (id value)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;reversed:&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">reversed</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13395,11 +13379,15 @@ Percentage found: 4
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>she PRON
-ate VERB
-the DET
-pizza NOUN
-. PUNCT
+<pre>reversed: llA
+reversed: snoitazilareneg
+reversed: era
+reversed: eslaf
+reversed: ,
+reversed: gnidulcni
+reversed: siht
+reversed: eno
+reversed: .
 </pre>
 </div>
 </div>
@@ -13410,13 +13398,26 @@ pizza NOUN
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># dependency label scheme</span>
-<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="p">,</span><span class="n">token</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">dep_</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-    <span class="c1"># head is like the parent token the current token attached to</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">spacy.lang.en</span> <span class="k">import</span> <span class="n">English</span>
+<span class="kn">from</span> <span class="nn">spacy.tokens</span> <span class="k">import</span> <span class="n">Doc</span>
+
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">English</span><span class="p">()</span>
+
+<span class="c1"># Define the getter function</span>
+<span class="k">def</span> <span class="nf">get_has_number</span><span class="p">(</span><span class="n">doc</span><span class="p">):</span>
+    <span class="c1"># Return if any of the tokens in the doc return True for token.like_num</span>
+    <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">token</span><span class="o">.</span><span class="n">like_num</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">)</span>
+
+
+<span class="c1"># Register the Doc property extension &quot;has_number&quot; with the getter get_has_number</span>
+<span class="n">Doc</span><span class="o">.</span><span class="n">set_extension</span><span class="p">(</span><span class="s2">&quot;has_number&quot;</span><span class="p">,</span> <span class="n">getter</span><span class="o">=</span><span class="n">get_has_number</span><span class="p">)</span>
+
+<span class="c1"># Process the text and check the custom has_number attribute</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s2">&quot;The museum closed for five years in 2012.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;has_number:&quot;</span><span class="p">,</span> <span class="n">doc</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">has_number</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13433,196 +13434,9 @@ pizza NOUN
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>she PRON nsubj ate
-ate VERB ROOT ate
-the DET det pizza
-pizza NOUN dobj ate
-. PUNCT punct ate
+<pre>has_number: True
 </pre>
 </div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># If you don&#39;t any thing in spacy just use spacy explain</span>
-<span class="n">spacy</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="s2">&quot;det&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[27]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;determiner&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s2">&quot;Apple is looking at buying UK startup for $1 billion .&quot;</span><span class="p">)</span>
-<span class="c1"># for named entities in text </span>
-<span class="k">for</span> <span class="n">entities</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">ents</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">entities</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">entities</span><span class="o">.</span><span class="n">label_</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Apple ORG
-UK GPE
-$1 billion MONEY
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">spacy</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="s2">&quot;GPE&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[29]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;Countries, cities, states&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[39]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## Rule Based Matching</span>
-<span class="c1"># spacy matcher works on not only on strings also on docs</span>
-<span class="c1"># we use dictionaries to specify the  pattern</span>
-
-<span class="kn">from</span> <span class="nn">spacy.matcher</span> <span class="k">import</span> <span class="n">Matcher</span>
-
-<span class="n">matcher</span> <span class="o">=</span> <span class="n">Matcher</span><span class="p">(</span><span class="n">nlp</span><span class="o">.</span><span class="n">vocab</span><span class="p">)</span>
-
-<span class="c1"># List of dicts per token</span>
-<span class="c1"># Match exact tokens</span>
-<span class="c1"># pattern = [{&quot;TEXT&quot;:&quot;iphone&quot;}]</span>
-
-<span class="c1">#match lexical attributes</span>
-<span class="c1"># pattern = [{&quot;LOWER&quot;:&quot;iphone&quot;}]</span>
-
-<span class="c1">#match any token attributes</span>
-<span class="c1"># pattern = [{&quot;LEMMA&quot;:&quot;buy&quot;},{&quot;POS&quot;:&#39;NOUN&#39;}]</span>
-
-<span class="c1"># optional</span>
-<span class="c1"># pattern = [{&quot;LEMMA&quot;:&quot;buy&quot;,&quot;OP&quot;:&quot;?&quot;},{&quot;POS&quot;:&#39;NOUN&#39;}]</span>
-<span class="c1"># ! negate ,</span>
-<span class="c1"># ? 0/1 </span>
-<span class="c1"># + 1 or many </span>
-<span class="c1"># * zero or many</span>
-<span class="n">pattern</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;TEXT&quot;</span><span class="p">:</span><span class="s2">&quot;iphone&quot;</span><span class="p">},{</span><span class="s2">&quot;TEXT&quot;</span><span class="p">:</span><span class="s2">&quot;X&quot;</span><span class="p">}]</span>
-
-<span class="n">matcher</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;IPHONE_Pattern&quot;</span><span class="p">,</span><span class="kc">None</span><span class="p">,</span> <span class="n">pattern</span><span class="p">)</span>
-
-<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s2">&quot;Upcoming iphone X release date is leaked&quot;</span><span class="p">)</span>
-
-<span class="n">matches</span> <span class="o">=</span> <span class="n">matcher</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">match_id</span><span class="p">,</span> <span class="n">start</span> <span class="p">,</span> <span class="n">end</span> <span class="ow">in</span> <span class="n">matches</span><span class="p">:</span>
-    <span class="n">matched_span</span> <span class="o">=</span> <span class="n">doc</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">matched_span</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-    
-<span class="n">matches</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>iphone X
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[39]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[(14405892316545644887, 1, 3)]</pre>
-</div>
-
 </div>
 
 </div>
@@ -13634,40 +13448,77 @@ $1 billion MONEY
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span>
-    <span class="s2">&quot;After making the iOS update you won&#39;t notice a radical system-wide &quot;</span>
-    <span class="s2">&quot;redesign: nothing like the aesthetic upheaval we got with iOS 7. Most of &quot;</span>
-    <span class="s2">&quot;iOS 11&#39;s furniture remains the same as in iOS 10. But you will discover &quot;</span>
-    <span class="s2">&quot;some tweaks once you delve a little deeper.&quot;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Scaling and Performance</span>
+
+<span class="c1"># docs = list(nlp.pipe(LOTS_OF_TE))</span>
+<span class="c1"># only tokenizer</span>
+<span class="c1"># nlp.make_doc</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># reading json data</span>
+<span class="c1"># import json</span>
+<span class="c1"># with open(&quot;exercises/en/tweets.json&quot;) as f:</span>
+<span class="c1">#     TEXTS = json.loads(f.read())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
+
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">)</span>
+<span class="n">text</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;Chick-fil-A is an American fast food restaurant chain headquartered in &quot;</span>
+    <span class="s2">&quot;the city of College Park, Georgia, specializing in chicken sandwiches.&quot;</span>
 <span class="p">)</span>
-
-<span class="c1"># Write a pattern for full iOS versions (&quot;iOS 7&quot;, &quot;iOS 11&quot;, &quot;iOS 10&quot;)</span>
-<span class="n">pattern</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;TEXT&quot;</span><span class="p">:</span> <span class="s2">&quot;iOS&quot;</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;IS_DIGIT&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}]</span>
-
-<span class="c1"># Add the pattern to the matcher and apply the matcher to the doc</span>
-<span class="n">matcher</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;IOS_VERSION_PATTERN&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">pattern</span><span class="p">)</span>
-<span class="n">matches</span> <span class="o">=</span> <span class="n">matcher</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total matches found:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">))</span>
-
-<span class="c1"># Iterate over the matches and print the span text</span>
-<span class="k">for</span> <span class="n">match_id</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="ow">in</span> <span class="n">matches</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Match found:&quot;</span><span class="p">,</span> <span class="n">doc</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="c1"># Disable the tagger and parser</span>
+<span class="k">with</span> <span class="n">nlp</span><span class="o">.</span><span class="n">disable_pipes</span><span class="p">(</span><span class="s2">&quot;tagger&quot;</span><span class="p">,</span> <span class="s2">&quot;parser&quot;</span><span class="p">):</span>
+    <span class="c1"># Process the text</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="c1"># Print the entities in the doc</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">ents</span><span class="p">)</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
+<div class="output_wrapper">
+<div class="output">
 
-    </div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-cyan-fg">  File </span><span class="ansi-green-fg">&#34;&lt;ipython-input-13-6767b5109d0c&gt;&#34;</span><span class="ansi-cyan-fg">, line </span><span class="ansi-green-fg">2</span>
+<span class="ansi-red-fg">    ​</span>
+    ^
+<span class="ansi-red-fg">SyntaxError</span><span class="ansi-red-fg">:</span> invalid character in identifier
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
