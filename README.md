@@ -23,7 +23,7 @@ with open('demo.txt') , 'r') as f :
 ```
 2. Tabular Data Using pandas
 ```python
-import pandas
+import pandas as pd
 df = pd.read_csv('demo.csv')
 ```
 3. Fetching data from online Resources 
